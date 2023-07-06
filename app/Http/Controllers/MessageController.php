@@ -29,12 +29,12 @@ class MessageController extends Controller
             $data = [];$i=1;
             foreach($msges as $msg){
                 if($msg->is_active == true){
-                    $status = '<a href="javascript:change_status('.$msg->id.')"><label class="badge badge-success">Active</label></a>';
+                    $status = '<a href="javascript:change_status('.$msg->id.')"><label class="badge bg-label-success">Active</label></a>';
                 }
                 else{
-                    $status = '<a href="javascript:change_status('.$msg->id.')"><label class="badge badge-danger">inactive</label></a>';
+                    $status = '<a href="javascript:change_status('.$msg->id.')"><label class="badge bg-label-danger">inactive</label></a>';
                 }
-                $action = '<div class="d-flex gap-2"><a href="'.url('/child-message/'.$msg->id).'" class="btn btn-primary">Add Message</a><a href="'.url('/message-delete/'.$msg->id).'" class="btn btn-danger">Delete</a></div>';
+                $action = '<div class="d-flex gap-2"><a href="'.url('/child-message/'.$msg->id).'" class="btn btn-icon btn-outline-primary"><i class="bx bx-plus"></i></a><a href="'.url('/message-delete/'.$msg->id).'" class="btn btn-icon btn-outline-danger"><i class="bx bx-trash-alt"></i></a></div>';
                 $data[] = [
                     'sr_no' => $i++,
                     'title' => $msg->title,

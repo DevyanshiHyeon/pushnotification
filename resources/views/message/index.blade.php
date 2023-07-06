@@ -12,7 +12,7 @@
                             <h5 class="card-header">Add Message</h5>
                         </div>
                         <div class="col-md-4 text-md-end">
-                            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Instant
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Instant
                                 Notification</button>
                         </div>
                     </div>
@@ -138,8 +138,6 @@
                                     <textarea type="text" name="message" class="form-control" placeholder="Title" required></textarea>
                                 </div>
                             </div>
-
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

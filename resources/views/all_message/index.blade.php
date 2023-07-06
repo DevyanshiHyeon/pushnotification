@@ -21,7 +21,7 @@
                             <h5 class="card-header">Message</h5>
                         </div>
                         <div class="col-md-4">
-                            <button class="float-end btn btn-primary" data-toggle="modal" data-target="#exampleModal2" >Instatnt message</button>
+                            <button class="float-end btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2" >Instatnt message</button>
                         </div>
                     </div>
                 </div>
