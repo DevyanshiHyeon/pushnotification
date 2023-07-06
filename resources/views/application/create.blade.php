@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layout.app')
 @section('contant')
 <div class="row mt-4">
     <div class="col-8 grid-margin stretch-card">
-        <div class="card">
+        <div class="card mb-4">
             <div class="card-body">
-              <h4 class="card-title">Application</h4>
+              <h5 class="card-header">Application</h5>
               <form class="forms-sample" id="form" action="{{url('application')}}" method="POST">@csrf
                 @if(isset($application->id))
                 <input type="hidden" value="{{$application->id}}" name="app_id" />

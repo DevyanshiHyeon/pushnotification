@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layout.app')
 @section('contant')
     <div class="row mt-4">
         <div class="col-lg-12 grid-margin stretch-card">
-            <div class="card">
+            <div class="card mb-4">
                 <div class="card-body">
-                    <h4 class="card-title">Notification Status</h4>
+                    <h5 class="card-header">Notification Status</h5>
                     <div class="table-responsive">
                         <table class="table datatable" id="datatable">
                             <thead>

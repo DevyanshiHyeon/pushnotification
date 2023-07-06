@@ -1,15 +1,15 @@
-@extends('layouts.app')
+@extends('layout.app')
 @section('style')
 @endsection
 @section('contant')
 {{-- @dd($msg) --}}
     <div class="row mt-4">
         <div class="col-12 grid-margin stretch-card">
-            <div class="card">
+            <div class="card mb-4">
                     <div class="card-header">
                     <div class="row">
                         <div class="col-md-8">
-                            <h4 class="card-title">Add Message</h4>
+                            <h5 class="card-header">Add Message</h5>
                         </div>
                     </div>
                 </div>
@@ -66,9 +66,9 @@
             </div>
         </div>
         <div class="col-lg-12 grid-margin stretch-card @if(isset($msg->perent_id)) d-none @endif">
-            <div class="card">
+            <div class="card mb-4">
                 <div class="card-body">
-                    <h4 class="card-title">Message Data</h4>
+                    <h5 class="card-header">Message Data</h5>
                     <div class="table-responsive">
                         <table class="table @if(isset($msg->perent_id)) @else datatable  @endif " id="myTable">
                             <thead>

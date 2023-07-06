@@ -24,7 +24,7 @@ class ApplicationController extends Controller
                 'sr_no' => $i++,
                 'name' => $application->name,
                 'package_name' => $application->package_name,
-                'action' => '<a href="'.url('application/'.$application->id.'/edit').'" class="btn btn-dark btn-icon-text me-2">Edit</a><a href="'.url('application-info/'.$application->id).'" class="btn btn-dark btn-icon-text ">Info</i></a>'
+                'action' => '<a href="'.url('application/'.$application->id.'/edit').'" class="btn btn-icon btn-outline-primary me-2"><i class="bx bx-edit-alt"></i></a><a href="'.url('application-info/'.$application->id).'" class="btn btn-icon btn-outline-primary"><i class="bx bx-info-circle"></i></a>'
             ];
         }
         return Datatables::of($data)->rawColumns(['action'])->make(true);

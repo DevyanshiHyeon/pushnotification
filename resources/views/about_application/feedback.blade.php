@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layout.app')
 @section('contant')
 @include('about_application.navbar')
 <div class="row mt-4">
     <div class="col-12 grid-margin stretch-card">
 
-        <div class="card">
+        <div class="card mb-4">
             @if(session()->has('success'))
             <div class="alert alert-success">
                 {{ session()->get('success') }}
@@ -13,7 +13,7 @@
                 <div class="card-header">
                 <div class="row">
                     <div class="col-md-8">
-                        <h4 class="card-title">Feedbacks</h4>
+                        <h5 class="card-header">Feedbacks</h5>
                     </div>
                 </div>
             </div>

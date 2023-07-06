@@ -1,15 +1,15 @@
-@extends('layouts.app')
+@extends('layout.app')
 @section('style')
 @endsection
 @section('contant')
     <div class="row mt-4">
         <div class="col-12 grid-margin stretch-card">
 
-            <div class="card">
+            <div class="card mb-4">
                     <div class="card-header">
                     <div class="row">
                         <div class="col-md-8">
-                            <h4 class="card-title">Add Message</h4>
+                            <h5 class="card-header">Add Message</h5>
                         </div>
                         <div class="col-md-4 text-md-end">
                             <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Instant
@@ -73,9 +73,9 @@
             </div>
         </div>
         <div class="col-lg-12 grid-margin stretch-card">
-            <div class="card">
+            <div class="card mb-4">
                 <div class="card-body">
-                    <h4 class="card-title">Message Data</h4>
+                    <h5 class="card-header">Message Data</h5>
                     <div class="table-responsive">
                         <table class="table datatable" id="myTable">
                             <thead>
