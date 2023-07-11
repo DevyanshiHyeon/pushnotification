@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Application;
+use App\Models\AllMessage;
 use DataTables;
 use App\Models\AllToken;
 use Carbon\Carbon;
@@ -90,5 +91,18 @@ class ApplicationController extends Controller
     public function info($application_id)
     {
         return view('about_application.info');
+    }
+    public function changeStatus($application_id)
+    {
+        $app = AllMessage::find($application_id);
+        if($app->is_active == true){
+            $app->update(['is_active' => false]);
+            return response()->json(['success' => 'Status Change Successfully.'], 200);
+        }elseif($app->is_active == false){
+            $app->update(['is_active' => true]);
+            return response()->json(['success' => 'Status Change Successfully.'], 200);
+        }else{
+            return response()->json(['success' => 'Something Went Wrong.'], 200);
+        }
     }
 }

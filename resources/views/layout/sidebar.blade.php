@@ -37,7 +37,7 @@
         @endphp
         @foreach ($applications as $application)
             <li class="menu-item">
-                <a href="{{ url('application-info/' . $application->id) }}" class="menu-link">
+                <a href="{{ url('message/' . $application->id) }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-collection"></i>
                     <div data-i18n="Basic">{{ $application->name }}</div>
                 </a>

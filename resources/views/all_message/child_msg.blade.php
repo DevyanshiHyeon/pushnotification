@@ -1,4 +1,8 @@
 @extends('layout.app')
+@section('style')
+<link rel="stylesheet" href="{{url('assets/vendor/libs/animate-css/animate.css')}}" />
+<link rel="stylesheet" href="{{url('assets/vendor/libs/sweetalert2/sweetalert2.css')}}" />
+@endsection
 @section('contant')
 @include('about_application.navbar')
 @php
@@ -18,10 +22,9 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-8">
+                        <p class="fs-4 fw-bold">{{$msg['msg_title']}} - {{$msg['msg']}}</p>
                         <h5 class="card-header">Message</h5>
-                    </div>
-                    <div class="col-md-4">
-                        <button class="float-end btn btn-primary">Instatnt message</button>
+                        {{-- @dd($msg) --}}
                     </div>
                 </div>
             </div>
@@ -83,9 +86,9 @@
                                 <th>
                                     description
                                 </th>
-                                {{-- <th>
+                                <th>
                                     Action
-                                </th> --}}
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -96,7 +99,44 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="editmodal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalCenterTitle">Edit Message</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="" method="POST" id="edit_form">@csrf
+                <input type="hidden" name="message_id" value="" id="message_id" />
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="nameWithTitle" class="form-label">Title</label>
+                            <input type="text" id="title" name="title" class="form-control"
+                                placeholder="Enter Name" required />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-0">
+                            <label for="emailWithTitle" class="form-label">Message</label>
+                            <input type="text" id="message" name="message" class="form-control"
+                                placeholder="xxxx@xxx.xx" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" id="form_submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 @section('script')
+<script src="{{url('assets/vendor/libs/sweetalert2/sweetalert2.js')}}" ></script>
 <script src="{{ url('js/custom/all_msg/child_msg.js') }}"></script>
 @endsection

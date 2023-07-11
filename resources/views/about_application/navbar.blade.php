@@ -50,8 +50,52 @@
                         ETC
                     </a>
                 </li>
+                <li class="nav-item">
+                    <button data-bs-toggle="modal" data-bs-target="#exampleModal2" type="button"
+                        class="nav-link" role="tab">
+                        Instant Notification
+                    </button>
+                </li>
             </ul>
         </div>
     </div>
 </div>
 {{--  --}}
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create Message</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form" method="POST" action="{{ url('/send-instant-notification/'.$application_id) }}">@csrf
+                    @if (session()->has('message'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session()->get('message') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                    @endif
+                    <input type="hidden" name="is_instant" value="is_instant" />
+                    <div class="form-group mb-2 row">
+                        <label class="col-sm-3 col-form-label">Title</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="title" class="form-control" placeholder="Title" required>
+                        </div>
+                    </div>
+                    <div class="form-group mb-2 row">
+                        <label class="col-sm-3 col-form-label">Message</label>
+                        <div class="col-sm-9">
+                            <textarea type="text" name="message" class="form-control" placeholder="Title" required></textarea>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -50,6 +50,7 @@ Route::get('/application/create',[ApplicationController::class,'create']);
 Route::post('/application',[ApplicationController::class,'store']);
 Route::get('application/{application_id}',[ApplicationController::class,'show']);
 Route::get('application/{application_id}/edit',[ApplicationController::class,'edit']);
+Route::get('application/{application_id}/change-status',[ApplicationController::class,'changeStatus']);
 //info
 Route::get('/application-info/{application_id}',[ApplicationController::class,'info']);
 
@@ -61,9 +62,20 @@ Route::get('/feedback-list/{application_id}',[FeedbackController::class,'feedbac
 Route::get('message/{application_id}',[AllMessageController::class,'index']);
 Route::get('all-message-list/{application_id}',[AllMessageController::class,'all_message_list']);
 Route::post('message/{application_id}/',[AllMessageController::class,'store']);
+Route::get('message/edit/{application_id}',[AllMessageController::class,'edit']);
+Route::get('message/delete/{application_id}',[AllMessageController::class,'destroy']);
 
 //application's child message
 Route::get('child-msg/{application_id}/{perentmsg_id}',[AllMessageController::class,'child_msg']);
 Route::get('child-msg-list/{application_id}/{perentmsg_id}',[AllMessageController::class,'child_msg_list']);
 
+//dynamic application child msg
+Route::any('/child-message/{message_id}/edit',[ChildMessgaeController::class,'editChild']);
+Route::any('/child-message/{message_id}/update',[ChildMessgaeController::class,'updateChild']);
+
 Route::post('send-instant-notification/{application_id}',[AllMessageController::class,'send_instant_notification']);
+
+Route::get('/clear', function() {
+    Artisan::call('optimize:clear');
+    dd('All Set 👌');
+});

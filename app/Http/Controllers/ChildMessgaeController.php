@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Message;
 use DataTables;
+use App\Models\AllMessage;
 
 class ChildMessgaeController extends Controller
 {
@@ -55,5 +56,19 @@ class ChildMessgaeController extends Controller
     {
         $msg = Message::find($id);
         return view('child_msg.index',['msg'=>$msg]);
+    }
+    public function editChild($message_id)
+    {
+        $app = AllMessage::find($message_id);
+        return response()->json($app, 200);
+    }
+    public function updateChild(Request $request,$message_id)
+    {
+        $app = AllMessage::find($message_id);
+        $app->update([
+            'title' => $request->title,
+            'message' => $request->message
+        ]);
+        return response()->json(['success' => 'Message Updated Successfully.'], 200);
     }
 }

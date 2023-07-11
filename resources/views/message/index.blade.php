@@ -126,13 +126,13 @@
                                 </div>
                             @endif
                             <input type="hidden" name="is_instant" value="is_instant" />
-                            <div class="form-group row">
+                            <div class="form-group row mb-2">
                                 <label class="col-sm-3 col-form-label">Title</label>
                                 <div class="col-sm-9">
                                     <input type="text" name="title" class="form-control" placeholder="Title" required>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row mb-2">
                                 <label class="col-sm-3 col-form-label">Message</label>
                                 <div class="col-sm-9">
                                     <textarea type="text" name="message" class="form-control" placeholder="Title" required></textarea>

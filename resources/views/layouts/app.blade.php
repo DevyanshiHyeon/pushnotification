@@ -6,7 +6,6 @@
             {{-- @include('layouts.navbar') --}}
         </div>
             @include('layouts.sidebar')
-        <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <div class="main-panel">
                 <div class="content-wrapper" style="padding-right: 13%">
@@ -21,15 +20,9 @@
                     </div>
                     @yield('contant')
                 </div>
-                <!-- content-wrapper ends -->
             </div>
-            <!-- main-panel ends -->
         </div>
-        <!-- page-body-wrapper ends -->
     </div>
-    <!-- container-scroller -->
 @include('layouts.scripts')
-    <!-- End custom js for this page-->
 </body>
-
 </html>

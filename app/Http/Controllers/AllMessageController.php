@@ -20,22 +20,41 @@ class AllMessageController extends Controller
     public function all_message_list(Request $request, $application_id)
     {
         if ($request->ajax()) {
-            $all_msgs = AllMessage::where('application_id', $application_id)->whereNull('perent_id')->get();
-            $data = [];
-            $i = 1;
+            $all_msgs = AllMessage::where('application_id', $application_id)->whereNull('perent_id')->orderBy('created_at', 'desc')->get();
+            $data = [];$i = 1;
             foreach ($all_msgs as $msg) {
+                if($msg->is_instant == true){
+                    $status = '<span class="badge bg-label-info">Instant</span>';
+                    $action = '<a href="javascript:edit_msg('.$msg->id.')" class="btn btn-icon btn-outline-primary text-primary me-2"><i class="bx bx-edit-alt"></i></a><a href="javascript:delete_msg('.$msg->id.')" class="btn btn-icon btn-outline-danger text-danger"><i class="bx bx-trash-alt"></i></a>';
+                }elseif ($msg->is_active == true) {
+                    $status = '<a href="javascript:changeStatus('.$msg->id.')"><span class="badge bg-label-success">Active</span></a>';
+                    $action = '<a href="javascript:edit_msg('.$msg->id.')" class="btn btn-icon btn-outline-primary text-primary me-2"><i class="bx bx-edit-alt"></i></a><a href="javascript:delete_msg('.$msg->id.')" class="btn btn-icon btn-outline-danger text-danger me-2"><i class="bx bx-trash-alt"></i></a><a href="' . url('child-msg/' . $application_id . '/' . $msg->id) . '" class="btn btn-icon btn-outline-dark me-2"><i class="bx bx-plus"></i></a>';
+                }else{
+                    $status = '<a href="javascript:changeStatus('.$msg->id.')"><span class="badge bg-label-danger">Inactive</span></a>';
+                    $action = '<a href="javascript:edit_msg('.$msg->id.')" class="btn btn-icon btn-outline-primary text-primary me-2"><i class="bx bx-edit-alt"></i></a><a href="javascript:delete_msg('.$msg->id.')" class="btn btn-icon btn-outline-danger text-danger me-2"><i class="bx bx-trash-alt"></i></a><a href="' . url('child-msg/' . $application_id . '/' . $msg->id) . '" class="btn btn-icon btn-outline-dark"><i class="bx bx-plus"></i></a>';
+                }
                 $data[] = [
                     'sr_no' => $i++,
                     'title' => $msg->title,
                     'description' => $msg->message,
-                    'action' => '<a href="' . url('child-msg/' . $application_id . '/' . $msg->id) . '" class="btn btn-sm btn-dark">Add message</a>'
+                    'status' => $status,
+                    'action' => $action
                 ];
             }
-            return Datatables::of($data)->rawColumns(['action'])->make(true);
+            return Datatables::of($data)->rawColumns(['action','status'])->make(true);
         }
     }
     public function store($application_id, Request $request)
     {
+        if(isset($request->message_id)){
+            $msg = AllMessage::find($request->message_id);
+            $msg->update([
+                'title' => $request->title,
+                'message' => $request->message
+            ]);
+            $res = ['success' => 'Message Update Successfully.'];
+            return response()->json($res, 200);
+        }
         if ($request->perentmsg_id) {
             $perent_msg = AllMessage::find($request->perentmsg_id);
             AllMessage::create([
@@ -58,7 +77,11 @@ class AllMessageController extends Controller
     }
     public function child_msg($application_id, $perentmsg_id)
     {
-        return view('all_message.child_msg', compact('application_id', 'perentmsg_id'));
+        $_msg = AllMessage::find($perentmsg_id);
+        $msg = ['msg_title' => $_msg->title,
+                'msg' => $_msg->message
+            ];
+        return view('all_message.child_msg', compact('application_id', 'perentmsg_id','msg'));
     }
     public function child_msg_list($application_id, $perentmsg_id,Request $request)
     {
@@ -66,14 +89,13 @@ class AllMessageController extends Controller
             $all_msgs = AllMessage::where('application_id', $application_id)
             ->where('perent_id',$perentmsg_id)
             ->get();
-            $data = [];
-            $i = 1;
+            $data = [];$i = 1;
             foreach ($all_msgs as $msg) {
                 $data[] = [
                     'sr_no' => $i++,
                     'title' => $msg->title,
                     'description' => $msg->message,
-                    // 'action' => '<a href="' . url('child-msg/' . $application_id . '/' . $msg->id) . '" class="btn btn-sm btn-dark">Add message</a>'
+                    'action' => '<a href="javascript:edit('.$msg->id.')" class="btn btn-icon btn-outline-primary me-2"><i class="bx bx-edit-alt"></i></a><a href="javascript:deleteChild('.$msg->id.')" class="btn btn-icon btn-outline-danger me-2"><i class="bx bx-trash-alt"></i></a>'
                 ];
             }
             return Datatables::of($data)->rawColumns(['action'])->make(true);
@@ -81,6 +103,7 @@ class AllMessageController extends Controller
     }
     public function send_instant_notification(Request $request,$application_id)
     {
+        dd('asf');
         if(isset($request->is_instant)){
             $msg = AllMessage::create([
                 'application_id' => $application_id,
@@ -124,7 +147,7 @@ class AllMessageController extends Controller
                 }
             }
             // return $response->json();
-            return redirect('/message')->with('message',"Message sent Successfully ");
+            return redirect()->back()->with('message',"Message sent Successfully ");
         }
         $msg = Message::create([
             'title' => $request->title,
@@ -132,5 +155,23 @@ class AllMessageController extends Controller
             'send_time' => $request->time,
         ]);
         return redirect('/message')->with('message',"Message Added Successfully ");
+    }
+    public function edit($application_id)
+    {
+        $_msg = AllMessage::find($application_id);
+        $msg = ['id'=> $_msg->id,'title' => $_msg->title,'message' => $_msg->message];
+        return response()->json($msg, 200);
+    }
+    public function destroy($application_id)
+    {
+        $child_msgs = AllMessage::where('perent_id',$application_id)->get();
+        if(!empty($child_msgs)){
+            foreach ($child_msgs as $msg) {
+                $msg->delete();
+            }
+        }
+        $_msg = AllMessage::find($application_id);
+        $_msg->delete();
+        return response()->json(['success' => 'Message Delete Successfully.'], 200);
     }
 }

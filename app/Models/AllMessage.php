@@ -15,6 +15,8 @@ class AllMessage extends Model
         'message',
         'send_time',
         'status',
-        'perent_id'
+        'perent_id',
+        'is_instant',
+        'is_active'
     ];
 }
