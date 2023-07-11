@@ -22,7 +22,6 @@ class ChildMessgaeController extends Controller
                     'title' => $msg->title,
                     'msg' => $msg->message,
                     'action' => $action,
-
                 ];
             }
             return Datatables::of($data)->rawColumns(['status','action'])->make(true);
@@ -46,6 +45,7 @@ class ChildMessgaeController extends Controller
                 'message' => $request->message,
                 'send_time' => $perent_msg->send_time,
                 'perent_id' => $request->parent_id,
+                'is_instant' => false
             ]);
             return redirect()->back()->with('message',"Message Added Successfully ");
         }

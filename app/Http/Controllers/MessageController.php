@@ -25,16 +25,19 @@ class MessageController extends Controller
     public function get_message(Request $request)
     {
         if ($request->ajax()) {
-            $msges = Message::select('id','title','message','send_time','is_active')->whereNull('perent_id')->orderBy('id', 'DESC')->get();
+            $msges = Message::select('id','title','message','send_time','is_active','is_instant')->whereNull('perent_id')->orderBy('id', 'DESC')->get();
             $data = [];$i=1;
             foreach($msges as $msg){
-                if($msg->is_active == true){
+                if($msg->is_instant == true){
+                    $status = '<label class="badge bg-label-info">Instant</label>';
+                }
+                elseif($msg->is_active == true){
                     $status = '<a href="javascript:change_status('.$msg->id.')"><label class="badge bg-label-success cursor-pointer">Active</label></a>';
                 }
                 else{
                     $status = '<a href="javascript:change_status('.$msg->id.')"><label class="badge bg-label-danger cursor-pointer">inactive</label></a>';
                 }
-                $action = '<div class="d-flex gap-2"><a href="'.url('/child-message/'.$msg->id).'" class="btn btn-icon btn-outline-primary"><i class="bx bx-plus"></i></a><a href="'.url('/message-delete/'.$msg->id).'" class="btn btn-icon btn-outline-danger"><i class="bx bx-trash-alt"></i></a></div>';
+                $action = '<div class="d-flex gap-2"><a href="'.url('/child-message/'.$msg->id).'" class="btn btn-icon btn-outline-primary"><i class="bx bx-plus"></i></a><a href="javascript:deleteMessage('.$msg->id.')" class="btn btn-icon btn-outline-danger"><i class="bx bx-trash-alt"></i></a></div>';
                 $data[] = [
                     'sr_no' => $i++,
                     'title' => $msg->title,
@@ -42,7 +45,6 @@ class MessageController extends Controller
                     'send_time' => $msg->send_time,
                     'status' => $status,
                     'action' => $action,
-
                 ];
             }
             return Datatables::of($data)->rawColumns(['status','action'])->make(true);
@@ -97,6 +99,7 @@ class MessageController extends Controller
             'title' => $request->title,
             'message' => $request->message,
             'send_time' => $request->time,
+            'is_instant' => false,
         ]);
         return redirect('/message')->with('message',"Message Added Successfully ");
     }

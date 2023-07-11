@@ -1,5 +1,7 @@
 @extends('layout.app')
 @section('style')
+<link rel="stylesheet" href="{{url('assets/vendor/libs/animate-css/animate.css')}}" />
+<link rel="stylesheet" href="{{url('assets/vendor/libs/sweetalert2/sweetalert2.css')}}" />
 @endsection
 @section('contant')
     <div class="row mt-4">
@@ -149,6 +151,9 @@
         </div>
 @endsection
 @section('script')
+<script>
+</script>
+<script src="{{url('assets/vendor/libs/sweetalert2/sweetalert2.js')}}" ></script>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
     <script src="{{ url('/js/custom/message/index.js') }}"></script>
 @endsection
