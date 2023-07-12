@@ -1,7 +1,7 @@
 @extends('layout.app')
 @section('style')
-<link rel="stylesheet" href="{{url('assets/vendor/libs/animate-css/animate.css')}}" />
-<link rel="stylesheet" href="{{url('assets/vendor/libs/sweetalert2/sweetalert2.css')}}" />
+    <link rel="stylesheet" href="{{ url('assets/vendor/libs/animate-css/animate.css') }}" />
+    <link rel="stylesheet" href="{{ url('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
 @endsection
 @section('contant')
     @php
@@ -101,6 +101,7 @@
                                     <th>
                                         description
                                     </th>
+                                    <th>Daily Time</th>
                                     <th>Status</th>
                                     <th>
                                         Action
@@ -125,7 +126,7 @@
                 </div>
                 <form action="{{ url('message/' . $application_id) }}" method="POST" id="edit_form">@csrf
                     <input type="hidden" name="message_id" value="" id="message_id" />
-                    <input type="hidden" name="application_id" value="{{$application_id}}" />
+                    <input type="hidden" name="application_id" value="{{ $application_id }}" />
                     <div class="modal-body">
                         <div class="row">
                             <div class="col mb-3">
@@ -197,6 +198,6 @@
     </div> --}}
 @endsection
 @section('script')
-<script src="{{url('assets/vendor/libs/sweetalert2/sweetalert2.js')}}" ></script>
+    <script src="{{ url('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
     <script src="{{ url('js/custom/all_msg/index.js') }}"></script>
 @endsection

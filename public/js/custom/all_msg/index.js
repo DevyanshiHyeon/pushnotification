@@ -9,6 +9,7 @@ table = $("#myTable").DataTable({
         { data: "sr_no", name: "sr_no" },
         { data: "title", name: "title" },
         { data: "description", name: "description" },
+        { data: "daily_time", name: "daily_time" },
         { data: "status", name: "status" },
         { data: "action", name: "action" },
     ],

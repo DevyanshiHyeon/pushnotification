@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('send:notification')->everyMinute();
         $schedule->command('app:notification')->everyMinute();
+        $schedule->command('app:send-instant-notifination')->everyMinute();
     }
 
     /**

@@ -37,6 +37,7 @@ class AllMessageController extends Controller
                     'sr_no' => $i++,
                     'title' => $msg->title,
                     'description' => $msg->message,
+                    'daily_time' => $msg->send_time,
                     'status' => $status,
                     'action' => $action
                 ];
@@ -103,15 +104,19 @@ class AllMessageController extends Controller
     }
     public function send_instant_notification(Request $request,$application_id)
     {
-        dd('asf');
         if(isset($request->is_instant)){
+            $currentDateTime = Carbon::now();
+            $updatedDateTime = $currentDateTime->addMinute(1);
+            $updatedTime = $updatedDateTime->format('H:i');
             $msg = AllMessage::create([
                 'application_id' => $application_id,
                 'title' => $request->title,
                 'message' => $request->message,
-                'send_time' => now()->format('H:i'),
+                'send_time' => $updatedTime,
                 'is_instant' => true,
             ]);
+            return redirect()->back()->with('message',"Message will sent after minute Successfully ");
+
             $tokens = DB::table('all_tokens')->where('application_id',$application_id)->orderBy('created_at', 'desc')->pluck('token')->toArray();
             $app_serverkey = Application::find($application_id)->server_key;
             $serverKey = $app_serverkey;
@@ -146,7 +151,6 @@ class AllMessageController extends Controller
                     Log::error('Failed to send notification to ' . $t . ': ' . $response->getBody());
                 }
             }
-            // return $response->json();
             return redirect()->back()->with('message',"Message sent Successfully ");
         }
         $msg = Message::create([
