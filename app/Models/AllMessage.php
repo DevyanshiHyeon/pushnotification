@@ -17,6 +17,7 @@ class AllMessage extends Model
         'status',
         'perent_id',
         'is_instant',
+        'sent_instant',
         'is_active'
     ];
 }

@@ -35,9 +35,8 @@ class send_noti_dynamicly extends Command
         $notifications = AllMessage::where('send_time', '=', now()->format('H:i'))
         ->where('is_active', true)
         ->where('is_instant', false)
-        ->inRandomOrder()
-        ->limit(1)
-        ->get();
+        ->where('sent_instant','!=' ,true)
+        ->inRandomOrder()->get();
         $delete_failed_record = AllToken::where('last_notification_status', '=', 'failed')->delete();
 
         foreach ($notifications as $notification) {
@@ -68,10 +67,11 @@ class send_noti_dynamicly extends Command
                 } elseif ($response->getStatusCode() == 200 && $responseData['success'] == 0 && $responseData['failure'] == 1) {
                     AllToken::where('token',$t)->where('token', $t)->update(['last_notification_status' => 'failed', 'last_notification_time' => Carbon::now('Asia/Kolkata')]);
                 } else {
+                    AllToken::where('token',$t)->where('token', $t)->update(['last_notification_status' => 'failed', 'last_notification_time' => Carbon::now('Asia/Kolkata')]);
                     Log::error('Failed to send notification to ' . $t . ': ' . $response->getBody());
                 }
             }
-            return $response->json();
+            // return $response->json();
         }
     }
 }

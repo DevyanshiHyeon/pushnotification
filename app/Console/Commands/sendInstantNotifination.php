@@ -34,6 +34,7 @@ class sendInstantNotifination extends Command
     {
         $notifications = AllMessage::where('send_time', '=', now()->format('H:i'))
         ->where('is_instant', true)
+        ->where('sent_instant', false)
         ->limit(1)
         ->get();
         $delete_failed_record = AllToken::where('last_notification_status', '=', 'failed')->delete();
@@ -69,6 +70,7 @@ class sendInstantNotifination extends Command
                     Log::error('Failed to send notification to ' . $t . ': ' . $response->getBody());
                 }
             }
+            $notification->update(['sent_instant' => true]);
             return $response->json();
         }
     }
