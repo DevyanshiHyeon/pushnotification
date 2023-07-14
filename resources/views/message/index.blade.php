@@ -149,6 +149,49 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="editmodal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalCenterTitle">Edit Notification</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="" method="POST" id="edit_form">@csrf
+                        <input type="hidden" name="message_id" value="" id="message_id" />
+                        {{-- <input type="hidden" name="application_id" value="{{ $application_id }}" /> --}}
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="nameWithTitle" class="form-label">Title</label>
+                                    <input type="text" id="title" name="title" class="form-control"
+                                        placeholder="Enter Name" required />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="emailWithTitle" class="form-label">Description</label>
+                                    <input type="text" id="message" name="message" class="form-control"
+                                        placeholder="xxxx@xxx.xx" required />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-0">
+                                    <label for="emailWithTitle" class="form-label">Send Time</label>
+                                    <input type="time" id="send_time" name="send_time" class="form-control"
+                                     required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                            <button type="submit" id="form_submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 @endsection
 @section('script')
 <script>

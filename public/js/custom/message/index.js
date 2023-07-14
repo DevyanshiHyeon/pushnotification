@@ -105,3 +105,44 @@ function deleteMessage(msg_id) {
         }
     });
 }
+function edit_msg(msg_id) {
+    $.ajax({
+        url: baseUrl+'/message/edit/'+msg_id,
+        success: function (res) {
+            $("#title").val(res.title);
+            $("#message").val(res.message);
+            $("#message_id").val(msg_id);
+            $('#send_time').val(res.send_time);
+            $('#editmodal').modal('show');
+            $("#edit_form").attr("action", baseUrl+'/upate-message/'+msg_id);
+            console.log(res); },
+        error: function(error){console.log(error);}
+    })
+}
+// $("#form_submit").on("click", function () {
+//     $("#edit_form").validate({
+//         rules: {
+//             title: "required"
+//         },
+//         messages: {
+//             title: "Please title"
+//         }
+//     })
+//     $.ajax({
+//         type: $("#edit_form").attr("method"),
+//         url: $("#edit_form").attr("action"),
+//         data: $("#edit_form").serialize(),
+//         success: function (res) {
+//             $("#myElem").text(res.success);
+//             $("#myElem").show();
+//             table.ajax.reload();
+//             setTimeout(function () {
+//                 $("#myElem").hide();
+//             }, 5000);
+//             $("#editmodal").modal("hide");
+//         },
+//         error: function (err) {
+//             console.log(err);
+//         },
+//     });
+// });

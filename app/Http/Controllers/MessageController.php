@@ -37,12 +37,17 @@ class MessageController extends Controller
                 else{
                     $status = '<a href="javascript:change_status('.$msg->id.')"><label class="badge bg-label-danger cursor-pointer">inactive</label></a>';
                 }
-                $action = '<div class="d-flex gap-2"><a href="'.url('/child-message/'.$msg->id).'" class="btn btn-icon btn-outline-primary"><i class="bx bx-plus"></i></a><a href="javascript:deleteMessage('.$msg->id.')" class="btn btn-icon btn-outline-danger"><i class="bx bx-trash-alt"></i></a></div>';
+                if(!empty($msg->send_time)){
+                    $send_time = Carbon::createFromFormat('H:i:s', $msg->send_time)->format('h:i A');
+                }else{
+                    $send_time = '';
+                }
+                $action = '<div class="d-flex gap-2"><a href="javascript:edit_msg('.$msg->id.')" class="btn btn-icon btn-outline-primary text-primary"><i class="bx bx-edit-alt"></i></a><a href="javascript:deleteMessage('.$msg->id.')" class="btn btn-icon btn-outline-danger"><i class="bx bx-trash-alt"></i></a><a href="'.url('/child-message/'.$msg->id).'" class="btn btn-icon btn-outline-dark"><i class="bx bx-plus"></i></a></div>';
                 $data[] = [
                     'sr_no' => $i++,
                     'title' => $msg->title,
                     'msg' => $msg->message,
-                    'send_time' => $msg->send_time,
+                    'send_time' =>  $send_time,
                     'status' => $status,
                     'action' => $action,
                 ];
@@ -130,5 +135,16 @@ class MessageController extends Controller
         }catch(\Exception $e){
             return $e->getMessage();
         }
+    }
+    public function edit($id)
+    {
+        $msg = Message::find($id);
+        return response()->json($msg, 200);
+    }
+    public function update(Request $request,$id)
+    {
+        $msg = Message::find($id);
+        $msg->update($request->all());
+        return redirect('message')->with('message','Message Update Successfully.');
     }
 }

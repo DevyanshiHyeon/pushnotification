@@ -33,6 +33,8 @@ Route::get('/dashboard',[MainController::class,'index'] );
 Route::get('/get-data',[MainController::class,'get_data']);
 Route::get('/message-dashboard',[MessageController::class,'dashboard']);
 Route::get('/message',[MessageController::class,'index']);
+Route::get('/message/edit/{id}',[MessageController::class,'edit']);
+Route::post('upate-message/{id}',[MessageController::class,'update']);
 Route::get('delete-msg/{id}',[MessageController::class,'destroy']);
 // child-message
 Route::get('/child-message/{id}',[ChildMessgaeController::class,'index']);
