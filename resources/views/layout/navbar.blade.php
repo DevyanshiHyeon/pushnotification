@@ -6,13 +6,6 @@
         </a>
     </div>
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-        <div class="navbar-nav align-items-center">
-            <div class="nav-item d-flex align-items-center">
-                <i class="bx bx-search fs-4 lh-0"></i>
-                <input type="text" class="form-control border-0 shadow-none" placeholder="Search..."
-                    aria-label="Search..." />
-            </div>
-        </div>
         <ul class="navbar-nav flex-row align-items-center ms-auto">
             <li class="nav-item lh-1 me-3">
                 <a href="{{url('/application')}}" class="btn btn-primary">Applicaions</a>
