@@ -22,8 +22,8 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-8">
-                        <p class="fs-4 fw-bold">{{$msg['msg_title']}} - {{$msg['msg']}}</p>
-                        <h5 class="card-header">Message</h5>
+                        {{-- <p class="fs-4 fw-bold">{{$msg['msg_title']}} - {{$msg['msg']}}</p> --}}
+                        <h5 class="card-header">Notification</h5>
                         {{-- @dd($msg) --}}
                     </div>
                 </div>
@@ -67,7 +67,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-8">
-                        <h5 class="card-header">Message</h5>
+                        <h5 class="card-header">Notifications</h5>
                     </div>
 
                 </div>

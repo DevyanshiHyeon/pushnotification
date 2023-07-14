@@ -25,13 +25,13 @@ class AllMessageController extends Controller
             foreach ($all_msgs as $msg) {
                 if($msg->is_instant == true){
                     $status = '<span class="badge bg-label-info">Instant</span>';
-                    $action = '<a href="javascript:edit_msg('.$msg->id.')" class="btn btn-icon btn-outline-primary text-primary me-2"><i class="bx bx-edit-alt"></i></a><a href="javascript:delete_msg('.$msg->id.')" class="btn btn-icon btn-outline-danger text-danger"><i class="bx bx-trash-alt"></i></a>';
+                    $action = '<div class="d-flex"><a href="javascript:edit_msg('.$msg->id.')" class="btn btn-icon btn-outline-primary text-primary me-2"><i class="bx bx-edit-alt"></i></a><a href="javascript:delete_msg('.$msg->id.')" class="btn btn-icon btn-outline-danger text-danger"><i class="bx bx-trash-alt"></i></a></div>';
                 }elseif ($msg->is_active == true) {
                     $status = '<a href="javascript:changeStatus('.$msg->id.')"><span class="badge bg-label-success">Active</span></a>';
-                    $action = '<a href="javascript:edit_msg('.$msg->id.')" class="btn btn-icon btn-outline-primary text-primary me-2"><i class="bx bx-edit-alt"></i></a><a href="javascript:delete_msg('.$msg->id.')" class="btn btn-icon btn-outline-danger text-danger me-2"><i class="bx bx-trash-alt"></i></a><a href="' . url('child-msg/' . $application_id . '/' . $msg->id) . '" class="btn btn-icon btn-outline-dark me-2"><i class="bx bx-plus"></i></a>';
+                    $action = '<div class="d-flex"><a href="javascript:edit_msg('.$msg->id.')" class="btn btn-icon btn-outline-primary text-primary me-2"><i class="bx bx-edit-alt"></i></a><a href="javascript:delete_msg('.$msg->id.')" class="btn btn-icon btn-outline-danger text-danger me-2"><i class="bx bx-trash-alt"></i></a><a href="' . url('child-msg/' . $application_id . '/' . $msg->id) . '" class="btn btn-icon btn-outline-dark me-2"><i class="bx bx-plus"></i></a></div>';
                 }else{
                     $status = '<a href="javascript:changeStatus('.$msg->id.')"><span class="badge bg-label-danger">Inactive</span></a>';
-                    $action = '<a href="javascript:edit_msg('.$msg->id.')" class="btn btn-icon btn-outline-primary text-primary me-2"><i class="bx bx-edit-alt"></i></a><a href="javascript:delete_msg('.$msg->id.')" class="btn btn-icon btn-outline-danger text-danger me-2"><i class="bx bx-trash-alt"></i></a><a href="' . url('child-msg/' . $application_id . '/' . $msg->id) . '" class="btn btn-icon btn-outline-dark"><i class="bx bx-plus"></i></a>';
+                    $action = '<div class="d-flex"><a href="javascript:edit_msg('.$msg->id.')" class="btn btn-icon btn-outline-primary text-primary me-2"><i class="bx bx-edit-alt"></i></a><a href="javascript:delete_msg('.$msg->id.')" class="btn btn-icon btn-outline-danger text-danger me-2"><i class="bx bx-trash-alt"></i></a><a href="' . url('child-msg/' . $application_id . '/' . $msg->id) . '" class="btn btn-icon btn-outline-dark"><i class="bx bx-plus"></i></a><div>';
                 }
                 $data[] = [
                     'sr_no' => $i++,
@@ -51,8 +51,16 @@ class AllMessageController extends Controller
             $msg = AllMessage::find($request->message_id);
             $msg->update([
                 'title' => $request->title,
-                'message' => $request->message
+                'message' => $request->message,
+                'send_time' => $request->time
             ]);
+            if(isset($request->time)){
+                $child_apps = AllMessage::where('perent_id',$request->message_id)->get();
+                foreach ($child_apps as $child_app) {
+                    $app = AllMessage::find($child_app->id);
+                    $app->update(['send_time' => $request->time]);
+                }
+            }
             $res = ['success' => 'Message Update Successfully.'];
             return response()->json($res, 200);
         }
@@ -87,10 +95,17 @@ class AllMessageController extends Controller
     public function child_msg_list($application_id, $perentmsg_id,Request $request)
     {
         if ($request->ajax()) {
+            $data = [];$i = 1;
+            $_msg = AllMessage::find($perentmsg_id);
+            $data[] = [
+                'sr_no' => $i++,
+                'title' => '<b>'.$_msg->title.'</b>',
+                'description' => '<b>'.$_msg->message.'</b>',
+                'action' => '<a href="javascript:edit('.$_msg->id.')" class="btn btn-icon btn-outline-primary me-2"><i class="bx bx-edit-alt"></i></a><a href="javascript:deleteChild('.$_msg->id.')" class="btn btn-icon btn-outline-danger me-2"><i class="bx bx-trash-alt"></i></a>'
+            ];
             $all_msgs = AllMessage::where('application_id', $application_id)
             ->where('perent_id',$perentmsg_id)
             ->get();
-            $data = [];$i = 1;
             foreach ($all_msgs as $msg) {
                 $data[] = [
                     'sr_no' => $i++,
@@ -99,7 +114,7 @@ class AllMessageController extends Controller
                     'action' => '<a href="javascript:edit('.$msg->id.')" class="btn btn-icon btn-outline-primary me-2"><i class="bx bx-edit-alt"></i></a><a href="javascript:deleteChild('.$msg->id.')" class="btn btn-icon btn-outline-danger me-2"><i class="bx bx-trash-alt"></i></a>'
                 ];
             }
-            return Datatables::of($data)->rawColumns(['action'])->make(true);
+            return Datatables::of($data)->rawColumns(['title','description','action'])->make(true);
         }
     }
     public function send_instant_notification(Request $request,$application_id)
@@ -163,7 +178,7 @@ class AllMessageController extends Controller
     public function edit($application_id)
     {
         $_msg = AllMessage::find($application_id);
-        $msg = ['id'=> $_msg->id,'title' => $_msg->title,'message' => $_msg->message];
+        $msg = ['id'=> $_msg->id,'title' => $_msg->title,'message' => $_msg->message,'send_time' => $_msg->send_time];
         return response()->json($msg, 200);
     }
     public function destroy($application_id)

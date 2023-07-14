@@ -25,6 +25,8 @@ Route::get('/login',function(){
     return redirect('/');
 });
 Route::post('/login', [AuthController::class,'login']);
+
+Route::middleware('AuthMiddleware')->group(function(){
 Route::get('/logout',[AuthController::class,'logout']);
 Route::get('/dashboard',[MainController::class,'index'] );
 
@@ -74,8 +76,10 @@ Route::any('/child-message/{message_id}/edit',[ChildMessgaeController::class,'ed
 Route::any('/child-message/{message_id}/update',[ChildMessgaeController::class,'updateChild']);
 
 Route::post('send-instant-notification/{application_id}',[AllMessageController::class,'send_instant_notification']);
+});
 
 Route::get('/clear', function() {
     Artisan::call('optimize:clear');
     dd('All Set 👌');
 });
+

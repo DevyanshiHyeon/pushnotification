@@ -25,7 +25,6 @@
         </ul>
     </div>
 </nav> --}}
-{{--  --}}
 
 <div class="row">
     <div class="col-xl-6">
@@ -35,7 +34,7 @@
                 <li class="nav-item">
                     <a href="{{ url('message/' . $application_id) }}" type="button"
                         class="nav-link @if (url()->current() == url('message/' . $application_id)) active @endif" role="tab">
-                        Message
+                        Notification
                     </a>
                 </li>
                 <li class="nav-item">
@@ -45,16 +44,16 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('application-info/' . $application_id) }}" type="button"
-                        class="nav-link @if (url()->current() == url('application-info/' . $application_id)) active @endif" role="tab">
-                        ETC
-                    </a>
-                </li>
-                <li class="nav-item">
                     <button data-bs-toggle="modal" data-bs-target="#exampleModal2" type="button"
                         class="nav-link" role="tab">
                         Instant Notification
                     </button>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('application-info/' . $application_id) }}" type="button"
+                        class="nav-link @if (url()->current() == url('application-info/' . $application_id)) active @endif" role="tab">
+                        ETC
+                    </a>
                 </li>
             </ul>
         </div>
@@ -65,7 +64,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Create Message</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Create Notification</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -85,7 +84,7 @@
                         </div>
                     </div>
                     <div class="form-group mb-2 row">
-                        <label class="col-sm-3 col-form-label">Message</label>
+                        <label class="col-sm-3 col-form-label">Description</label>
                         <div class="col-sm-9">
                             <textarea type="text" name="message" class="form-control" placeholder="Title" required></textarea>
                         </div>

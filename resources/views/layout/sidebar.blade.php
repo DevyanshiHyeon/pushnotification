@@ -18,11 +18,11 @@
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item">
+                {{-- <li class="menu-item">
                     <a href="{{ url('/message-dashboard') }}" class="menu-link">
                         <div data-i18n="Without menu">Dashboard</div>
                     </a>
-                </li>
+                </li> --}}
                 <li class="menu-item">
                     <a href="{{ url('/message') }}" class="menu-link">
                         <div data-i18n="Without navbar">Message</div>
@@ -30,6 +30,12 @@
                 </li>
 
             </ul>
+        </li>
+        <li class="menu-item">
+            <a href="{{url('/application')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-book-add"></i>
+                <div data-i18n="Basic">Add Applicaions</div>
+            </a>
         </li>
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Applications</span></li>
         @php

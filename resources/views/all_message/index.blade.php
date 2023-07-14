@@ -25,7 +25,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-8">
-                            <h5 class="card-header">Message</h5>
+                            <h5 class="card-header">Notification</h5>
                         </div>
                         {{-- <div class="col-md-4">
                             <button class="float-end btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2" >Instatnt message</button>
@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Message</label>
+                                        <label class="col-sm-3 col-form-label">Description</label>
                                         <div class="col-sm-9">
                                             <textarea type="text" name="message" class="form-control" placeholder="Title" required></textarea>
                                         </div>
@@ -83,7 +83,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-8">
-                            <h5 class="card-header">Message</h5>
+                            <h5 class="card-header">Notifications</h5>
                         </div>
                     </div>
                 </div>
@@ -136,10 +136,17 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col mb-0">
-                                <label for="emailWithTitle" class="form-label">Message</label>
+                            <div class="col mb-3">
+                                <label for="emailWithTitle" class="form-label">Description</label>
                                 <input type="text" id="message" name="message" class="form-control"
                                     placeholder="xxxx@xxx.xx" required />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-0">
+                                <label for="emailWithTitle" class="form-label">Send Time</label>
+                                <input type="time" id="send_time" name="time" class="form-control"
+                                 required />
                             </div>
                         </div>
                     </div>

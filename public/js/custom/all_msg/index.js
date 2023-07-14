@@ -36,8 +36,9 @@ function edit_msg(msg_id) {
             $("#title").val(res.title);
             $("#message").val(res.message);
             $("#message_id").val(msg_id);
+            $('#send_time').val(res.send_time);
             // $("#edit_form").attr("action", "");
-            console.log(res);
+            // console.log(res);
         },
         error: function (err) {},
     });
@@ -48,8 +49,9 @@ $("#form_submit").on("click", function () {
         url: $("#edit_form").attr("action"),
         data: $("#edit_form").serialize(),
         success: function (res) {
-            $("#alert-text").text(res.success);
+            $("#myElem").text(res.success);
             $("#myElem").show();
+            table.ajax.reload();
             setTimeout(function () {
                 $("#myElem").hide();
             }, 5000);
