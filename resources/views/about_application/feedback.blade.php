@@ -29,7 +29,7 @@
                                     Title
                                 </th>
                                 <th>
-                                    Message
+                                    Description
                                 </th>
                             </tr>
                         </thead>

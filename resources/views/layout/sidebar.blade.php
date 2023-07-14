@@ -25,16 +25,16 @@
                 </li> --}}
                 <li class="menu-item">
                     <a href="{{ url('/message') }}" class="menu-link">
-                        <div data-i18n="Without navbar">Message</div>
+                        <div data-i18n="Without navbar">Notification</div>
                     </a>
                 </li>
 
             </ul>
         </li>
         <li class="menu-item">
-            <a href="{{url('/application')}}" class="menu-link">
+            <a href="{{url('/application')}}" class="menu-link btn btn-primary text-white" id="btn-add-app">
                 <i class="menu-icon tf-icons bx bx-book-add"></i>
-                <div data-i18n="Basic">Add Applicaions</div>
+                <div data-i18n="Basic" class="">Add Applicaions</div>
             </a>
         </li>
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Applications</span></li>

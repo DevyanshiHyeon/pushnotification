@@ -9,7 +9,7 @@
                     <div class="card-header">
                     <div class="row">
                         <div class="col-md-8">
-                            <h5 class="card-header">Add Message</h5>
+                            <h5 class="card-header">Add Notification</h5>
                         </div>
                     </div>
                 </div>
@@ -49,9 +49,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Message</label>
+                                        <label class="col-sm-3 col-form-label">Description</label>
                                         <div class="col-sm-9">
-                                            <textarea type="text" name="message" class="form-control" placeholder="Title">@if (isset($msg->message)) {{$msg->message}} @endif</textarea>
+                                            <textarea type="text" name="message" class="form-control" placeholder="Description">@if (isset($msg->message)) {{$msg->message}} @endif</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -68,7 +68,7 @@
         <div class="col-lg-12 grid-margin stretch-card @if(isset($msg->perent_id)) d-none @endif">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-header">Message Data</h5>
+                    <h5 class="card-header">Description Data</h5>
                     <div class="table-responsive">
                         <table class="table @if(isset($msg->perent_id)) @else datatable  @endif " id="myTable">
                             <thead>
@@ -80,7 +80,7 @@
                                         Title
                                     </th>
                                     <th>
-                                        Message
+                                        Description
                                     </th>
                                     <th>
                                         Action

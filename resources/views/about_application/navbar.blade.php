@@ -86,7 +86,7 @@
                     <div class="form-group mb-2 row">
                         <label class="col-sm-3 col-form-label">Description</label>
                         <div class="col-sm-9">
-                            <textarea type="text" name="message" class="form-control" placeholder="Title" required></textarea>
+                            <textarea type="text" name="message" class="form-control" placeholder="Description" required></textarea>
                         </div>
                     </div>
             </div>

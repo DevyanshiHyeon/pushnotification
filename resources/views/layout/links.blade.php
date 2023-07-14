@@ -52,5 +52,12 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
     <script src="{{url('assets/js/config.js')}}"></script>
+    <style>
+            #btn-add-app:hover, #btn-add-app:focus {
+                color: #fff;
+                background-color: #696cff;
+                border-color: #696cff; /*set the color you want here*/
+            }
+    </style>
     @yield('style')
   </head>

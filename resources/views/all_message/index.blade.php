@@ -49,7 +49,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Description</label>
                                         <div class="col-sm-9">
-                                            <textarea type="text" name="message" class="form-control" placeholder="Title" required></textarea>
+                                            <textarea type="text" name="message" class="form-control" placeholder="Description" required></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@
                                         Sr_no
                                     </th>
                                     <th>
-                                        message
+                                        Title
                                     </th>
                                     <th>
                                         description

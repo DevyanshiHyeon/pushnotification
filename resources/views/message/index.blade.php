@@ -11,7 +11,7 @@
                     <div class="card-header">
                     <div class="row">
                         <div class="col-md-8">
-                            <h5 class="card-header">Add Message</h5>
+                            <h5 class="card-header">Create Notification</h5>
                         </div>
                         <div class="col-md-4 text-md-end">
                             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Instant
@@ -50,9 +50,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Message</label>
+                                        <label class="col-sm-3 col-form-label">Description</label>
                                         <div class="col-sm-9">
-                                            <textarea type="text" name="message" class="form-control" placeholder="Title"></textarea>
+                                            <textarea type="text" name="message" class="form-control" placeholder="Description"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-header">Message Data</h5>
+                    <h5 class="card-header">Notifications</h5>
                     <div class="table-responsive">
                         <table class="table datatable" id="myTable">
                             <thead>
@@ -89,7 +89,7 @@
                                         Title
                                     </th>
                                     <th>
-                                        Message
+                                        Description
                                     </th>
                                     <th>
                                         Daily Time
@@ -115,7 +115,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Create Message</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Create Notification</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -135,9 +135,9 @@
                                 </div>
                             </div>
                             <div class="form-group row mb-2">
-                                <label class="col-sm-3 col-form-label">Message</label>
+                                <label class="col-sm-3 col-form-label">Description</label>
                                 <div class="col-sm-9">
-                                    <textarea type="text" name="message" class="form-control" placeholder="Title" required></textarea>
+                                    <textarea type="text" name="message" class="form-control" placeholder="Description" required></textarea>
                                 </div>
                             </div>
                     </div>

@@ -45,9 +45,9 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Message</label>
+                                <label class="col-sm-3 col-form-label">Description</label>
                                 <div class="col-sm-9">
-                                    <textarea type="text" name="message" class="form-control" placeholder="Title"></textarea>
+                                    <textarea type="text" name="message" class="form-control" placeholder="Description"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -81,10 +81,10 @@
                                     Sr_no
                                 </th>
                                 <th>
-                                    message
+                                    Title
                                 </th>
                                 <th>
-                                    description
+                                    Description
                                 </th>
                                 <th>
                                     Action
@@ -104,7 +104,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalCenterTitle">Edit Message</h5>
+                <h5 class="modal-title" id="modalCenterTitle">Edit Notification</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="" method="POST" id="edit_form">@csrf
@@ -119,9 +119,9 @@
                     </div>
                     <div class="row">
                         <div class="col mb-0">
-                            <label for="emailWithTitle" class="form-label">Message</label>
+                            <label for="emailWithTitle" class="form-label">Description</label>
                             <input type="text" id="message" name="message" class="form-control"
-                                placeholder="xxxx@xxx.xx" required />
+                                placeholder="Description" required />
                         </div>
                     </div>
                 </div>

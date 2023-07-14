@@ -33,11 +33,12 @@ class AllMessageController extends Controller
                     $status = '<a href="javascript:changeStatus('.$msg->id.')"><span class="badge bg-label-danger">Inactive</span></a>';
                     $action = '<div class="d-flex"><a href="javascript:edit_msg('.$msg->id.')" class="btn btn-icon btn-outline-primary text-primary me-2"><i class="bx bx-edit-alt"></i></a><a href="javascript:delete_msg('.$msg->id.')" class="btn btn-icon btn-outline-danger text-danger me-2"><i class="bx bx-trash-alt"></i></a><a href="' . url('child-msg/' . $application_id . '/' . $msg->id) . '" class="btn btn-icon btn-outline-dark"><i class="bx bx-plus"></i></a><div>';
                 }
+                $send_time = Carbon::createFromFormat('H:i:s', $msg->send_time)->format('h:i A');
                 $data[] = [
                     'sr_no' => $i++,
                     'title' => $msg->title,
                     'description' => $msg->message,
-                    'daily_time' => $msg->send_time,
+                    'daily_time' => $send_time,
                     'status' => $status,
                     'action' => $action
                 ];
